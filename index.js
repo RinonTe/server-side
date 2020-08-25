@@ -9,12 +9,22 @@ const app = express();
 
 // We want express to run on this port
 const port = 3000;
+/*app.get('/', (request, response) => {
+  console.log('Request: /');
+  response.sendFile(__dirname + '/index.html');
+});*/
+
+app.get('/', (request, response) => {
+  response.render('./views/index.html.njk');
+});
 
 app.listen(port, () => {
   console.log(`app is running here: http://localhost:${port}`);
 });
  
-app.get('/', (request, response) => {
-  console.log('Request: /');
-  response.sendFile(__dirname + '/index.html');
+const nunjucks = require('nunjucks');
+
+nunjucks.configure({
+  autoescape: true,
+  express: app
 });
